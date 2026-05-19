@@ -1,0 +1,55 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+
+using simpleapp.Models;
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+
+namespace simpleapp.Pages;
+
+public class IndexModel : PageModel{
+    private readonly IHttpClientFactory _httpClientFactory;
+
+    public IndexModel(IHttpClientFactory httpClientFactory){
+        _httpClientFactory = httpClientFactory;
+    }
+
+    public List<DragonBalls> Characters { get; set; } = new();
+
+    public async Task OnGetAsync(){
+        //var client = _httpClientFactory.CreateClient();
+        //var response = await client.GetAsync("https://restcountries.com/v3.1/all");
+
+        var client = _httpClientFactory.CreateClient("RestDragonBall");
+        var response = await client.GetAsync("?race=Saiyan&affiliation=Z fighter");
+
+        if (response.IsSuccessStatusCode){
+            var json = await response.Content.ReadAsStringAsync();
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            var dados = JsonSerializer.Deserialize<List<DragonBallApiResponse>>(json, options);
+
+            Characters = dados.Select(d => new DragonBalls{
+                Fighter = d.fighter?.name,
+                Id = d.id,
+                Description = d.image?.png
+
+            }).ToList();
+        }
+    }
+
+    /*
+private readonly ILogger<IndexModel> _logger;
+
+    public IndexModel(ILogger<IndexModel> logger)
+    {
+        _logger = logger;
+    }
+
+    public void OnGet()
+    {
+
+    }
+*/
+}
