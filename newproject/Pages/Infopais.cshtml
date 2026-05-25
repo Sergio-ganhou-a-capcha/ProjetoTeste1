@@ -1,0 +1,12 @@
+﻿@page
+@model InfopaisModel
+@{
+}
+
+<h1>name: @Model.InfoPais.OfficialName</h1>
+<p>
+    <strong>Code: @Model.CodigoPais</strong>
+</p>
+<img src="@Model.InfoPais.FlagUrl"
+     alt="@Model.InfoPais.OfficialName"
+     style="width:100%;" />

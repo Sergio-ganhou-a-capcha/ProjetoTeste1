@@ -1,0 +1,24 @@
+﻿@page
+@model newproject.Pages.ListdragonballModel
+@{
+    ViewData["Title"] = "DragonBall page";
+}
+
+<h1>Lista de DragonBall</h1>
+
+@if (Model.DragonBalles?.Count > 0){
+
+    <div style="display: flex; flex-wrap: wrap;">
+        @foreach (var dragonball in Model.DragonBalles){
+            <div style="border: 1px solid #ccc; margin: 10px; padding: 10px; width: 200px;">
+                <img src="@dragonball.imageUrl" alt="Imagem de @dragonball.OfficialName" width="100" />
+                <p><strong>@dragonball.OfficialName</strong></p>
+                <p>ID: @dragonball.UniqueId</p>
+                <a asp-page="/Infodragonball" asp-route-id="@dragonball.UniqueId">Ver info</a>
+            </div>
+        }
+    </div>
+}
+else{
+    <p>ERRO : não temos lista </p>
+}

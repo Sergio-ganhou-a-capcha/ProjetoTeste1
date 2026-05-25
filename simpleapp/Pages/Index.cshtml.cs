@@ -31,9 +31,9 @@ public class IndexModel : PageModel{
             var dados = JsonSerializer.Deserialize<List<DragonBallApiResponse>>(json, options);
 
             Characters = dados.Select(d => new DragonBalls{
-                Fighter = d.fighter?.name,
                 Id = d.id,
-                Description = d.image?.png
+                Fighter = d.name,
+                ImageURL = d.image
 
             }).ToList();
         }

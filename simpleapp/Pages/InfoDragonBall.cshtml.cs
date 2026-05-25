@@ -48,12 +48,11 @@ namespace simpleapp.Pages
             InfoDragonBall = new DragonBalls
             {
                 Id = artigoResponse.id,
-                Fighter = artigoResponse.fighter?.name,
-                Description = artigoResponse.description?.description,
-                ImageURL = artigoResponse.image?.png,
-                Affiliation = artigoResponse.affiliation?.affiliation
+                Fighter = artigoResponse.name,
+                Description = artigoResponse.description,
+                ImageURL = artigoResponse.image,
+                Affiliation = artigoResponse.affiliation
             };
-            
 
             return Page();
         }

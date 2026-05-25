@@ -11,24 +11,9 @@ namespace simpleapp.Models{
 
     public class DragonBallApiResponse{
         public int ?id { get; set; }
-        public Fighter ?fighter { get; set; }
-        public Description ?description { get; set; }
-        public Image ?image { get; set; }
-        public Affiliation ?affiliation { get; set; }
-    }
-
-    public class Fighter{
         public string ?name { get; set; }
-    }
-
-    public class Description{
         public string ?description { get; set; }
-    }
-    public class Affiliation{
+        public string ?image { get; set; }
         public string ?affiliation { get; set; }
-    }
-
-    public class Image{
-        public string ?png { get; set; }
     }
 }
